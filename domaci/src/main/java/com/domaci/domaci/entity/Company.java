@@ -23,7 +23,9 @@ public class Company implements Serializable {
      */
     @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Department> departments = new HashSet<>();
-
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="contact_id", referencedColumnName = "id")
+    private Contact contact = new Contact();
 
     public Long getId() {
         return id;
@@ -53,9 +55,26 @@ public class Company implements Serializable {
         return departments;
     }
 
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
     public void setDepartments(Set<Department> departments) {
         this.departments = departments;
     }
+
+    /*@Override
+    public String toString() {
+        return "Company{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }*/
 
     @Override
     public String toString() {
@@ -63,6 +82,7 @@ public class Company implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
+                ", contact=" + contact +
                 '}';
     }
 }

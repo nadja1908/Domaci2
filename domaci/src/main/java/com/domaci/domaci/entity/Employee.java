@@ -44,6 +44,9 @@ public class Employee implements Serializable {
     @Column
     private String position;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="contact_id", referencedColumnName = "id")
+    private Contact contact = new Contact();
     /*
         Druga strana bidirekcione veze 1:n
      */
@@ -103,6 +106,17 @@ public class Employee implements Serializable {
         this.department = department;
     }
 
+   /* @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", position='" + position + '\'' +
+                ", department=" + department +
+                '}';
+    }*/
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -110,6 +124,7 @@ public class Employee implements Serializable {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", position='" + position + '\'' +
+                ", contact=" + contact +
                 ", department=" + department +
                 '}';
     }
